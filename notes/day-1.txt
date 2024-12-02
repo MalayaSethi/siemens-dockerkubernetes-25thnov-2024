@@ -176,7 +176,32 @@ And Hyper-V is no more needed so they will abandon it to focus on WSL2.
 
 Docker Desktop:
 -------------------------------
-docker engine
-docker desktop (docker engine [daemon] & CLI)
-docker hub
+docker engine [daemon] 
+docker client (docker cli)
 docker compose
+etc.
+
+docker hub
+
+
+docker image: a standardized package that contains - files, binaries, dependencies, configuration to run a container
+
+1. images are read-only
+2. images are composed of layers. each layer talks about a set of file system changes that add, remove or update files.
+
+
+1. basic commands and package manager, such as, apt (thin layer of linux distro)
+2. install node:alpine version (runtime and depedency management)
+3. sets the root directory for application resources
+4. copies my app specific code files (place it in a directory)
+5. running the command
+ (RUN, COMMNAD, ENTRYPOINT)
+
+when you build multiple versions of the image, these layers help you to be re-sued in between the builds
+
+docker run => create and run container
+docker start <container-name/id> => starts an existing stopped container (by default=> detactched mode)
+docker start -a <container-name/id> => starts an existing stopped container in attached mode
+
+docker attach <container-name/id>
+
