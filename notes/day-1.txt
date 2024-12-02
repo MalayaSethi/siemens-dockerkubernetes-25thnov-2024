@@ -1,3 +1,174 @@
+what is containerization? why do we need it?
+
+running form of an app => based on the image of the app
+
+dependencies:
+	=> dotnet sdk 8.0 (compiler, runtime)
+	=> dotnet runtime 8.0
+
+challenges:
+------------------------------
+1. development environment => every team member must have the same environment when working on the same project 
+2. development and production environment might be different - they should be exactly the same
+3. when working with a particular project, you need to install the local dependencies and when that project is over you need to uninstall and then install some other dependencies for the new project etc.
 
 
+solution (expectation):
+--------------------------------
+1. we want to have the exact same environment for dev and prod
+2. it would be great if a common dev env/setup can be shared with members of the team (even wit the new members in future)
+3. we don't want to in/uninstall local dependencies and runtimes all the time
 
+Virtual Machines:
+---------------------------
+advantages:
+
+separate environments
+env specific config is possible
+env specific config can be shared reliably between the VMs
+
+cons:
+redundant duplication of app/sw/dependencies
+since they are machines (VMs), boot up time might be longer, performance will be slow
+its bit of headache to reproduce the same env through multiple VMs
+
+Containerization:
+-----------------------------------
+a package of [code and dependencies to run that code] => some way to standardize
+container => it is way to standardize, a standardized unit of s/w
+the same container always produces/yields the exact same app and execution behavior, no matter where or by whom it might be executed
+
+every modern O/S has built-in support for containers (WSL in case windows)
+
+Docker =>
+-------------------------------
+a container technology. Tool to create and manage the containers.
+it simplifies the creation and management of containers.
+
+blueprint => house
+
+file (language/synatx) => set of instructions about code and dependencies => (image) => container
+
+Image: 
+-------------------------------
+1. template/blueprint for containers
+2. contains code + required tools/runtime (dependencies)
+3. Layer-based, read-only
+4. image does not contain any data
+
+Contaniner:
+--------------------------------
+the running unit of s/w (code)
+based on the same image multiple containers can be built
+there is a top layer in the container which is can be used by app running inside the container to store data temporarily
+
+
+Hypervisor:
+-------------------------------
+A hypervisor is software that allows multiple virtual machines (VMs) to run on a single physical machine by sharing the machine's resources. It's also known as a virtual machine monitor (VMM)
+
+working of a hypervisor:
+-----------------------------------
+1. Resource allocation
+The hypervisor allocates the physical machine's resources, like memory, CPU, and storage, to the VMs. 
+2. Isolation
+The hypervisor keeps the operating system and resources of the physical machine separate from the VMs. 
+3. Virtualization
+The hypervisor makes virtualization possible, which allows users to experience each VM as an independent computing environment.
+
+There are two types of hypervisors:
+-----------------------------------
+1. Type 1 hypervisor:
+Also known as a bare metal hypervisor, this type of hypervisor sits on top of the physical server and has direct access to the hardware resources.
+
+2. Type 2 hypervisor:
+Also known as a hosted or embedded hypervisor, this type of hypervisor is an application installed on the host operating system.
+
+Different Hypervisors:
+-------------------------------
+1. Virtual Box
+2. VMware
+3. Hyper-V (windows only - Type 1 hypervisor)
+
+Because of their flexibility and portability, virtual machines provide many benefits, such as:
+
+1. Cost savings—running multiple virtual environments from one piece of infrastructure means that you can drastically reduce your physical infrastructure footprint. This boosts your bottom line—decreasing the need to maintain nearly as many servers and saving on maintenance costs and electricity.
+
+2. Agility and speed—Spinning up a VM is relatively easy and quick and is much simpler than provisioning an entire new environment for your developers. Virtualization makes the process of running dev-test scenarios a lot quicker.
+
+3. Lowered downtime—VMs are so portable and easy to move from one hypervisor to another on a different machine—this means that they are a great solution for backup, in the event the host goes down unexpectedly.
+
+4. Scalability—VMs allow you to more easily scale your apps by adding more physical or virtual servers to distribute the workload across multiple VMs. As a result you can increase the availability and performance of your apps.
+
+5. Security benefits— Because virtual machines run in multiple operating systems, using a guest operating system on a VM allows you to run apps of questionable security and protects your host operating system. VMs also allow for better security forensics, and are often used to safely study computer viruses, isolating the viruses to avoid risking their host computer.
+
+Disadvantages:
+1. slow to start
+2. resource sensitive
+3. Each VM needs a full-blown OS with proper license, requires patch up with host OS
+4. limited number of VMs
+
+WSL (Windows Sub-system for Linux)
+----------------------------------------
+Windows Subsystem for Linux (WSL) lets developers run a GNU/Linux environment -- including most command-line tools, utilities, and applications -- directly on Windows, unmodified, without the overhead of a traditional virtual machine or dual-boot setup.
+WSL is designed to provide a seamless and productive experience for developers who want to use both Windows and Linux at the same time.
+1.  WSL to install and run various Linux distributions, such as Ubuntu, Debian, Kali, and more
+Store files in an isolated Linux file system, specific to the installed distribution.
+2. run command-line tools, such as BASH.
+3. run  common BASH command-line tools such as grep, sed, awk, or other ELF-64 binaries.
+4. Run Bash scripts and GNU/Linux command-line applications
+
+Question: why hyper-v and wsl are required on windows OS for docker desktop to work properly?
+---------------------------------------------------------------------------------------------
+Answer:
+Docker Desktop for Windows works with WSL2 for Win11 home, pro and enterprise .
+Win11 pro or enterprise version comes up with built-in Hypervisor known as Hyper-v (VMM)
+The WSL2 backend is recommended over the HyperV-based WSL1 backend.
+
+Support for Docker on Windows is not native, Docker was written to be run on Linux initially. So the requirements for running Docker CE on Windows are:
+
+Virtualization must be enabled since docker-ce creates a VM on Hyper-V. Since all hypervisors require hardware virtualization to be enabled, Hyper-V in this matter is not exceptional. The Docker for Windows installer will enable Hyper-V for you, if needed, and restart your machine.
+
+For older Windows systems that don’t support hardware virtualization, it’s recommended to use Docker Toolbox which uses Oracle Virtualbox to spin up VMs that will host docker containers instead of Hyper-V.
+
+More details:
+-------------------------
+Docker evolved on Linux. Much of the confusion arises with Docker trying to support containerization on Windows.
+
+A container is considered “native”, if it can run directly on the host operating system.
+
+Linux Container: A Linux application that runs in an isolated Linux environment.
+This same container can be run on Windows using virtualization to emulate a Linux environment, but the container is still running on Linux. This virtualization can be
+
+VirtualBox (Docker Toolbox)
+Hyper-V backend (Docker Desktop)
+WSL2 backend (Docker Desktop)
+
+Windows (Server) Container: A Windows application that runs in an isolated Windows environment.
+
+Process Isolation - This is the “traditional” isolation mode for containers. It is approximately the same as how Linux containers run on Linux
+
+Hyper-V isolation - This isolation mode offers enhanced security and broader compatibility between host and container versions.
+
+As you can see, Hyper-V can be used to run even native Windows containers, which is generally a source of confusion.
+
+Important to remember:
+-----------------------------------
+An O/S kernel is like the core of any O/S, with bare minimum API (for memory allocation, process scehduling) are supported
+Docker DOES NOT NEED A FULL-FLEDGE LINUX DISTRO, ONLY KENRNEL IS SUFFICIENT
+
+About WSL2 or Hype-V:
+-------------------------------------
+1. WSL can run distributions in both WSL version 1 or WSL 2 mode. 
+You can check this by opening PowerShell and entering: wsl -l -v. 
+
+2. Ensure that the your distribution is set to use WSL 2 by entering: wsl --set-version <distro>. Replace <distro> with the distro name (e.g. Ubuntu 18.04).
+
+In WSL version 1, due to fundamental differences between Windows and Linux, the Docker Engine couldn't run directly inside WSL, so the Docker team developed an alternative solution using Hyper-V VMs and LinuxKit. 
+However, since WSL 2 now runs on a Linux kernel with full system call capacity, Docker can fully run in WSL 2. This means that Linux containers can run natively without emulation, resulting in better performance and interoperability between your Windows and Linux tools.
+
+In a nutshell:
+WSL2 will replace Hyper-V.
+We used to need both Hyper-V and WSL. 
+Then we could use WSL2 only.
+And Hyper-V is no more needed so they will abandon it to focus on WSL2.

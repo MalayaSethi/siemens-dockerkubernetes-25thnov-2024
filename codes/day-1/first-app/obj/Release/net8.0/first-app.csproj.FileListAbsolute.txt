@@ -1,0 +1,15 @@
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\bin\Release\net8.0\first-app.exe
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\bin\Release\net8.0\first-app.deps.json
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\bin\Release\net8.0\first-app.runtimeconfig.json
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\bin\Release\net8.0\first-app.dll
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\bin\Release\net8.0\first-app.pdb
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.GeneratedMSBuildEditorConfig.editorconfig
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.AssemblyInfoInputs.cache
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.AssemblyInfo.cs
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.csproj.CoreCompileInputs.cache
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.sourcelink.json
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.dll
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\refint\first-app.dll
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.pdb
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\first-app.genruntimeconfig.cache
+D:\training\siemens-dockerkubernetes-25thnov-2024\codes\day-1\first-app\obj\Release\net8.0\ref\first-app.dll
