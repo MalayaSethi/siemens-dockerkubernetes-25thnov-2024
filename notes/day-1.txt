@@ -174,7 +174,34 @@ Then we could use WSL2 only.
 And Hyper-V is no more needed so they will abandon it to focus on WSL2.
 
 
-Docker Desktop:
+Docker:
+-----------------------------
+
+a. what is doker?
+Its a platform for building, running and shipping applications in a consistent manner, so that the way it runs on development machine, the same way it runs on other machine
+     
+the reasons why the application does not run properly on another machine:
+1. may be one or few files are missing from the application, i.e. not fully deployed
+2. the target machine has a different version of a s/w, on which the application is dependent on, from the expected version
+3. different configuration (environment variable) settings
+
+docker helps you create an image of the application along with all its dependencies and settings and then uses an isolated environment, called container to run the application from its image, while downloading its dependencies inside the container.
+even, if multiple applications depend on different version of same s/w, docker can download different versions of the same s/w for those applications running in different container, on the same machine.
+it eleminates the requirement of the multiple versions of the same s/w on the other machine.
+even when the application is no longer required, then at one go, the application and all of its dependencies can be removed.
+	
+in a nutshell, docker helps you to consistently build, run and ship your application across all the machines
+
+Docker Vs VMs:
+----------------------------------
+Docker Containers -
+1. allow running multiple apps in isolation with having full blown OS for each of them
+2. are lightweight
+3. use single OS as the host, so we do need license for just host OS
+4. starts quickly
+5. We don't need allocate huge amount of resources from host OS as we don't need much resource for full blown OS, but just for the container. hence containers need less h/w resources compared to VMs
+
+software => Docker Desktop:
 -------------------------------
 docker engine [daemon] 
 docker client (docker cli)
@@ -183,13 +210,34 @@ etc.
 
 docker hub
 
+Architecture of docker
+------------------------------------
+Docker uses client-server architecture, where docker client s/w talks to a docker server (also known as docker engine) using RESTful API.
+every container is a special type of process
+all containers share the same host OS, or beter to say, the Kernel of the host OS.
+Kernel is the core of any OS, like an engine of a car. A kernel manages all applications as well as h/w resources of an OS.
+Every OS has Kernel with different APIs, that's why we can't winodws application on a linux OS.
+Hence linux OS can run only linux containers.
+Whereas, nowadays, windows 11 OS is shipped with two different Kernels: windows kernel which is the core here and also a linux kernel.
+hence on windows machine, you can run linux as well as Windows containers
+Mac OS kernel does not have any built-in support to run containers, hence it requires a linux VM to run linux containers
 
-docker image: a standardized package that contains - files, binaries, dependencies, configuration to run a container
+docker image: 
+-------------------------------------
+A container image is a bundle of files organized into a stack of layers that resides on your local machine or in a remote container registry. 
+The container image consists of the user mode operating system files needed to support your app, any runtimes or dependencies of your app, and any other miscellaneous configuration file your app needs to run properly.
 
-1. images are read-only
-2. images are composed of layers. each layer talks about a set of file system changes that add, remove or update files.
+In a nutshell it contains
+		1. a cut-down OS
+		2. runtime environment such as, .net or node etc.
+		3. application files
+		4. 3rd party libraries (dependencies) of an application
+		5. environment variables
 
+dockerfile: contains instructions to package our application and its dependencies into an image
 
+Image as layers:
+----------------------------------
 1. basic commands and package manager, such as, apt (thin layer of linux distro)
 2. install node:alpine version (runtime and depedency management)
 3. sets the root directory for application resources
@@ -197,8 +245,24 @@ docker image: a standardized package that contains - files, binaries, dependenci
 5. running the command
  (RUN, COMMNAD, ENTRYPOINT)
 
-when you build multiple versions of the image, these layers help you to be re-sued in between the builds
+when you build multiple versions of the image, these layers are re-sued in between the builds
 
+How Containers work?
+-------------------------------------------------
+ - A container is an isolated, lightweight package for running an application on the host operating system. 
+ - Containers build on top of the host operating system's kernel (which can be thought of as the buried plumbing of the operating system)
+ - While a container shares the host operating system's kernel, the container doesn't get unfettered access to it. 
+ - Instead, the container gets an isolated–and in some cases virtualized–view of the system. 
+	For example, a container can access a virtualized version of the file system and registry, but any changes affect only the container and are discarded when it stops. 
+ - To save data, the container can mount persistent storage such as an Azure Disk or a file share (including Azure Files).
+
+ - A container builds on top of the kernel, but the kernel doesn't provide all of the APIs and services an app needs to run–most of these are provided by system files (libraries) that run above the kernel in user mode. 
+ - Because a container is isolated from the host's user mode environment, the container needs its own copy of these user mode system files, which are packaged into something known as a base image. 
+ - The base image serves as the foundational layer upon which your container is built, providing it with operating system services not provided by the kernel. 
+
+
+some basic commands:
+--------------------------------
 docker run => create and run container
 docker start <container-name/id> => starts an existing stopped container (by default=> detactched mode)
 docker start -a <container-name/id> => starts an existing stopped container in attached mode

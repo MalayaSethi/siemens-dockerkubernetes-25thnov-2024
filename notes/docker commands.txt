@@ -1,0 +1,40 @@
+Docker Build:
+--------------------------------------------------
+>docker build -t sample-app .          	=> tag: latest
+>docker build -t sample-app:1.0.0 .		=> tag: 1.0.0
+
+
+Docker run:
+-------------------------------------
+>docker run sample-app:1.0.0/latest		=> will create new container every time you run this command and those containers will be attached container, means, it will block the terminal 
+
+>docker run -d sample-app:1.0.0/latest 	=> will create new container every time you run this command and those containers will be detatched container, means, it will NOT block the terminal 
+
+>docker run --rm sample-app:1.0.0/latest => same like above, but it is configured to be removed as soon as the container is stopped
+
+>docker start <container-name/id>			=> will start an existing (stopped) container in detatched mode
+
+>docker start -a <container-name/id>		=> will start an existing (stopped) container in attached mode [Attach STDOUT/STDERR and forward signals]
+
+>docker attach <container-name/id>		=> will attach to the container running in the background (running in the detatched mode)
+
+>docker logs <container-name/id>			=> will attch to the container and fetch the logs of a container
+
+>docker logs -f <container-name/id>		=> will attch to the container and fetch the logs of a container and follows the log output continuously, means, this is another way to get attached to the detatched container again
+
+>docker stop <container-name/id>			=> will stop the container
+
+>docker rm <container1-name/id> <container2-name/id> ...
+											=> removes the container(s)
+
+>docker start -a -i <container-name/id>	=> will start an existing (stopped) container in attached and interactive mode (for both input and output, since using just -a flag wil help to attach STDOUT/STDERR and forward signals)
+
+>docker run -i sample-app:1.0.0/latest	=> will create new container every time you run this command in attached and interactive mode 
+
+>docker image ls							=> displays images (by default hides intermediate images)
+[aliases: docker image list/docker images]
+
+Note: "docker image" command is to manage images, but "docker images" is just to display or display filtered images etc.
+
+>docker image rm image1 image2...			=> removes image(s)
+[aliases: docker image remove, docker rmi]
