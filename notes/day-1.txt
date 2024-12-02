@@ -172,3 +172,11 @@ WSL2 will replace Hyper-V.
 We used to need both Hyper-V and WSL. 
 Then we could use WSL2 only.
 And Hyper-V is no more needed so they will abandon it to focus on WSL2.
+
+
+Docker Desktop:
+-------------------------------
+docker engine
+docker desktop (docker engine [daemon] & CLI)
+docker hub
+docker compose
