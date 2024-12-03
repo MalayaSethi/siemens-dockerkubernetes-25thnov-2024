@@ -20,6 +20,7 @@ app.get('/product/:id', async (req, res) => {
 
 app.post('/add', async (req, res) => {
     try {
+        console.log(req.params.body);
         const result = await addProduct(req.params.body)
         res.status(201).json(result)
     } catch (error) {

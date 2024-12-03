@@ -1,7 +1,11 @@
 const { connect } = require('mssql');
-const { DB_CONFIG } = require('./dbconfig');
+//const { DB_CONFIG } = require('./dbconfig');
 
-const CONNECTION_STRING = 'server=joydip-pc\\sqlexpress;database=siemensdb;user id=sa;password=sqlserver2024;TrustServerCertificate=True'
+//local run
+// const CONNECTION_STRING = 'server=joydip-pc\\sqlexpress,1433;database=siemensdb;user id=sa;password=sqlserver2024;TrustServerCertificate=True'
+
+//from container trying to reach SQL Server
+const CONNECTION_STRING = 'server=host.docker.internal/sqlexpress,1433;database=siemensdb;user id=sa;password=sqlserver2024;TrustServerCertificate=True'
 
 const getProducts = async () => {
     let pool;

@@ -70,5 +70,18 @@ C. TMPFS mount:
 >docker run -d -p 3003:3001 --name feedback-container-3 --env-file .env -v feedback-volume:/app/feedback --tmpfs /app/temp feedback-app:v1
 
 
+Networking:
+-------------------------
+1. container app to WWW communication
+2. container app to local/host machine service/app
+3. container app to container app
+4. local machine to container app (-p 3000:3000)
+
+
+
+
+
+
+
 
 

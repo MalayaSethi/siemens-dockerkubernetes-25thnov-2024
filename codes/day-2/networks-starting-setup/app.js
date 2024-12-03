@@ -66,18 +66,18 @@ app.get('/people', async (req, res) => {
     res.status(500).json({ message: 'Something went wrong.' });
   }
 });
-// app.listen(3000, () => console.log('server is running on port 3000'))
-mongoose.connect(
-  //'mongodb://localhost:27017/swfavorites',
-  //'mongodb://172.17.0.2:27017/swfavorites',
-  'mongodb://mongoserver:27017/swfavorites',
-  { useNewUrlParser: true }
-).then(
-  (value) => {
-    console.log(value.connection);
-    app.listen(3000, () => console.log('server is running on port 3000'))
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+app.listen(3000, () => console.log('server is running on port 3000'))
+// mongoose.connect(
+//'mongodb://localhost:27017/swfavorites',
+//'mongodb://172.17.0.2:27017/swfavorites',
+//   'mongodb://mongoserver:27017/swfavorites',
+//   { useNewUrlParser: true }
+// ).then(
+//   (value) => {
+//     console.log(value.connection);
+//     app.listen(3000, () => console.log('server is running on port 3000'))
+//   },
+//   (err) => {
+//     console.log(err);
+//   }
+// );
