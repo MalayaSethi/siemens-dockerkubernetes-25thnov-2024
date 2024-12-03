@@ -29,5 +29,12 @@ app.get('/error', (req, res) => {
     process.exit(1)
 })
 
-const PORT = 3000
-app.listen(PORT, () => console.log('server running on http://localhost:' + PORT))
+const PORT = process.env.PORT || process.env.DEFAULT_PORT
+app.listen(PORT, () => {
+    console.log('server running on http://localhost:' + PORT)
+    console.log(process.env.NODE_VERSION)
+    console.log(process.env.PATH)
+    console.log(process.env.USER_NAME);
+    console.log(process.env.PASSWORD);
+}
+)

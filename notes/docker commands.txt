@@ -54,7 +54,8 @@ Build Cache     20        0         962.2MB   962.2MB
 
 clear the complete build cache:
 ------------------------------------------
- docker builder prune -a
+>docker builder prune -a
+
 WARNING! This will remove all build cache. Are you sure you want to continue? [y/N] y
 all cache will be removed
 
@@ -63,6 +64,35 @@ exposing a port and mapping it to an external port of local machine:
 docker run [-d] [--rm] -p <local-machine-port>:<container/app-internal-port> --name <container-name> <image-name:tag>
 
 EXPOSE command in Dockerfile is JUST for the documentation purpose. IT DOESN'T EXPOSE THAT CONTAINER-SPECIFIC PORT OUTSIDE THE CONTAINER.
+
+
+ENV (environment variables):
+-------------------------------------------
+1. declare an environment variable using ENV command (as key value pair)
+ENV PORT=<number>
+
+2. pass the environment variables via docker cli (creating and running the container)
+------------------------------------------------------------------------------------- 
+when the code is: 
+const PORT = process.env.PORT || process.env.DEFAULT_PORT
+
+when the docker file is: 
+ENV DEFAULT_PORT=3000
+EXPOSE ${DEFAULT_PORT}
+
+a. if you pass the port number via -e[/--env] flag as key pair value
+>docker run -d --rm -p 8001:3001 -e PORT=3001 --name message-container-1 message-app:v2
+
+b. if you DO NOT pass the port number via -e[/--env] flag as key pair value
+>docker run -d --rm -p 8002:3000 --name message-container-1 message-app:v2
+
+
+3. if your environment variables are written in an .env file:
+-----------------------------------------------------------------------------
+> docker run -d --rm -p 8002:3001 --env-file .env --name message-container-1 message-app:v2
+or (in this case PORT numbef is being passed by -e flag and rest of the env variables written inside a file (.env) which is passed via --env-file flag)
+
+>docker run -d --rm -p 8002:3001 --env-file .env -e PORT=3001  --name message-container-1 message-app:v2
 
 docker inspect:
 --------------------------------------------
@@ -138,3 +168,4 @@ docker inspect:
         }
     }
 ]
+2. container >docker inspect <container-name>
