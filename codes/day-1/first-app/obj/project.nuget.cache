@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pKffdVR5jRQ=",
+  "dgSpecHash": "hN77lzLc7dE=",
   "success": true,
-  "projectFilePath": "D:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj",
+  "projectFilePath": "d:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

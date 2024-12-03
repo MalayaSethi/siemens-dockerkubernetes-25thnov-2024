@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj": {}
+    "d:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj": {}
   },
   "projects": {
-    "D:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj": {
+    "d:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj",
+        "projectUniqueName": "d:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj",
         "projectName": "first-app",
-        "projectPath": "D:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj",
+        "projectPath": "d:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\first-app.csproj",
         "packagesPath": "C:\\Users\\joydip\\.nuget\\packages\\",
-        "outputPath": "D:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\obj\\",
+        "outputPath": "d:\\training\\siemens-dockerkubernetes-25thnov-2024\\codes\\day-1\\first-app\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

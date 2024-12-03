@@ -1,0 +1,34 @@
+const { connect } = require('mssql')
+var config = {
+    user: 'sa',
+    password: 'sqlserver2024',
+    server: 'joydip-pc',
+    database: 'siemensdb',
+    options: {
+        // Set to true if using Windows Authentication
+        //trustedConnection: true, 
+        trustServerCertificate: true,
+        trustedConnection: false,
+        instancename: 'SQLEXPRESS'
+    },
+    port: 1433
+    //driver: "msnodesqlv8", // Required if using Windows Authentication
+};
+(async () => {
+    try {
+        const pool = await connect(config);
+        // const pool = await connect('server=joydip-pc\\sqlexpress;1433;database=siemensdatabase;user id=sa;password=sqlserver2024;TrustServerCertificate=True')
+        const result = await pool.request().query('select * from products;')
+        console.dir(result)
+
+        // const result = await query('select * from products;')
+        // console.dir(result)
+
+        // const req = new Request()
+        // const result = await req.query('use siemensdb;select * from products;')
+        // console.dir(result)
+
+    } catch (error) {
+        console.log(error);
+    }
+})()
