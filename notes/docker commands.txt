@@ -1,11 +1,11 @@
 Docker Build:
 --------------------------------------------------
->docker build -t sample-app .          	=> tag: latest
+>docker build -t sample-app .          		=> tag: latest
 >docker build -t sample-app:1.0.0 .		=> tag: 1.0.0
 
 
 Docker run:
--------------------------------------
+--------------------------------------------------------------------------------------------
 >docker run sample-app:1.0.0/latest		=> will create new container every time you run this command and those containers will be attached container, means, it will block the terminal 
 
 >docker run -d sample-app:1.0.0/latest 	=> will create new container every time you run this command and those containers will be detatched container, means, it will NOT block the terminal 
@@ -25,16 +25,116 @@ Docker run:
 >docker stop <container-name/id>			=> will stop the container
 
 >docker rm <container1-name/id> <container2-name/id> ...
-											=> removes the container(s)
+							=> removes the container(s)
 
 >docker start -a -i <container-name/id>	=> will start an existing (stopped) container in attached and interactive mode (for both input and output, since using just -a flag wil help to attach STDOUT/STDERR and forward signals)
 
 >docker run -i sample-app:1.0.0/latest	=> will create new container every time you run this command in attached and interactive mode 
 
->docker image ls							=> displays images (by default hides intermediate images)
+>docker image ls				=> displays images (by default hides intermediate images)
 [aliases: docker image list/docker images]
 
 Note: "docker image" command is to manage images, but "docker images" is just to display or display filtered images etc.
 
 >docker image rm image1 image2...			=> removes image(s)
 [aliases: docker image remove, docker rmi]
+
+
+
+check docker storage status:
+--------------------------------
+>docker system df
+
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          0         0         737.1MB   737.1MB (100%)
+Containers      0         0         0B        0B
+Local Volumes   0         0         0B        0B
+Build Cache     20        0         962.2MB   962.2MB
+
+
+clear the complete build cache:
+------------------------------------------
+ docker builder prune -a
+WARNING! This will remove all build cache. Are you sure you want to continue? [y/N] y
+all cache will be removed
+
+exposing a port and mapping it to an external port of local machine:
+-----------------------------------------------------------------------------
+docker run [-d] [--rm] -p <local-machine-port>:<container/app-internal-port> --name <container-name> <image-name:tag>
+
+EXPOSE command in Dockerfile is JUST for the documentation purpose. IT DOESN'T EXPOSE THAT CONTAINER-SPECIFIC PORT OUTSIDE THE CONTAINER.
+
+docker inspect:
+--------------------------------------------
+1. image [>docker inspect <image-name:tag>]
+
+ >docker inspect message-app:v1
+[
+    {
+        "Id": "sha256:4c96bad8216e1877b5baea9d64a226d2448afadd6a053fae3cb4f68dd78c3e2a",
+        "RepoTags": [
+            "message-app:v1"
+        ],
+        "RepoDigests": [
+            "message-app@sha256:4c96bad8216e1877b5baea9d64a226d2448afadd6a053fae3cb4f68dd78c3e2a"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2024-12-03T05:13:48.99607432Z",
+        "DockerVersion": "27.3.1",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NODE_VERSION=23.3.0",
+                "YARN_VERSION=1.22.22"
+            ],
+            "Cmd": [
+                "node",
+                "app.js"
+            ],
+            "ArgsEscaped": true,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/restfulapp",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 56929266,
+        "GraphDriver": {
+            "Data": null,
+            "Name": "overlayfs"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:75654b8eeebd3beae97271a102f57cdeb794cc91e442648544963a7e951e9558",
+                "sha256:93d7151534df933a9e3dc58b2ebafb6d8904aad3e3e6614278c1475825a9dfa0",
+                "sha256:f71a23576e0ee0bc397fe0312f5ce9e87b1eb11f419e27b75d04d99182169652",
+                "sha256:4abdbe5986fd2dbdd5eb62cce02e777de628e263cd743461ac0147256cbe9bbc",
+                "sha256:3b291d1797f269389c71a37ed7b54ab813dcd387120504931a4ec156f3691416",
+                "sha256:bf8485e8d8c44a1b001102a3138b150a46183ebd66196b41220f113752aa209b"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2024-12-03T05:13:49.346937147Z"
+        }
+    }
+]

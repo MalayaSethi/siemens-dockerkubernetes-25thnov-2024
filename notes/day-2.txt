@@ -1,0 +1,27 @@
+continue with container
+data and volumes
+netwroking
+multi-container app
+docker-compose
+
+
+linux container
+    Distro
+linux OS kernel
+
+linux container
+linux distro
+WSL
+Linux kernel 
+
+windows container => app
+Windows O/S
+
+Windows Container => App
+windows 11 OS
+
+Hyper-V
+
+Windows Kernel (10)
+
+
