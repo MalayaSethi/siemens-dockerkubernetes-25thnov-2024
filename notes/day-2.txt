@@ -4,7 +4,13 @@ netwroking
 multi-container app
 docker-compose
 
-anonymous volume
+Mounts:
+-----------
+
+A. Volume Mounts:
+-----------------------
+
+1. anonymous volume
 ---------------------------------
 no name
 -v /<container-dir-path>
@@ -20,7 +26,7 @@ But if the all the containers which are sharing this volume, started with --rm f
 
 But if the any of the container which is sharing this volume, started not with --rm flag, when all of them are stopped and subsequently removed, the volumes  will still be there???
 
-named volume:
+2. named volume:
 ------------------------------
 you can create a named volume manually:
 >docker volume create feedback-volume
@@ -37,4 +43,32 @@ when the container is removed, and then again created, if you use the same named
 sharing volumes:
 ---------------------
 >docker run -d --rm -p 3001:3001 --name feedback-container-2 --env-file .env --volumes-from feedback-container-1 feedback-app:v1
+
+B. bind mounts:
+-------------------------------------
+provide the absolute path of the file or dierctory:
+-v <directory/file-abs-path>:/<container-dir-path>
+
+example:
+docker run 
+-d 
+--rm 
+-p 3001:3001 
+--name feedback-container-1 
+--env-file .env 
+-v D:/training/siemens-dockerkubernetes-25thnov-2024/codes/day-2/data-volumes-app/feedback:/app/feedback 
+-v D:/training/siemens-dockerkubernetes-25thnov-2024/codes/day-2/data-volumes-app/temp:/app/temp 
+feedback-app:v1
+
+
+"/var/lib/docker/volumes/feedback-volume/_data"
+
+--mount type=volume,source=feedback-volume,target=/app/feedback
+
+C. TMPFS mount:
+-----------------------
+>docker run -d -p 3003:3001 --name feedback-container-3 --env-file .env -v feedback-volume:/app/feedback --tmpfs /app/temp feedback-app:v1
+
+
+
 
