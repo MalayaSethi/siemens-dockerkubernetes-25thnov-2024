@@ -4,24 +4,37 @@ netwroking
 multi-container app
 docker-compose
 
+anonymous volume
+---------------------------------
+no name
+-v /<container-dir-path>
+this volume is persisted even when the docker container is stopped and even removed
+for every container, running the same image, new anonymous volume will be assigned (until and unless you want to share the anonymous volume of some other container)
 
-linux container
-    Distro
-linux OS kernel
+Note: 
+If the docker container is run using "--rm" flag the anonymous volume(s) will be removed, when the container is stopped and subsequently removed.
 
-linux container
-linux distro
-WSL
-Linux kernel 
+But if the volume(s) is/are being shared by multiple container, then the first container, for which this volume was created, will NOT be removed when the first container is stopped (it started with --rm flag, which should have removed the volume when this container is stopped, and subsequently removed).
 
-windows container => app
-Windows O/S
+But if the all the containers which are sharing this volume, started with --rm flag, when the last of them is stopped and subsequently removed, the volumes  will finally be removed.
 
-Windows Container => App
-windows 11 OS
+But if the any of the container which is sharing this volume, started not with --rm flag, when all of them are stopped and subsequently removed, the volumes  will still be there???
 
-Hyper-V
+named volume:
+------------------------------
+you can create a named volume manually:
+>docker volume create feedback-volume
 
-Windows Kernel (10)
+you can assign this volume to one or many containers
 
+you will provide a name for the volume
+-v <volume-name>:/<container-dir-path>
+this volume is persisted even when the docker container is stopped and even removed. --rm flag will NOT have any impact on it.
+
+when the container is removed, and then again created, if you use the same named volume from previous cycle, it will be attached with the existing named volume.
+
+
+sharing volumes:
+---------------------
+>docker run -d --rm -p 3001:3001 --name feedback-container-2 --env-file .env --volumes-from feedback-container-1 feedback-app:v1
 

@@ -94,6 +94,18 @@ or (in this case PORT numbef is being passed by -e flag and rest of the env vari
 
 >docker run -d --rm -p 8002:3001 --env-file .env -e PORT=3001  --name message-container-1 message-app:v2
 
+
+volumes command:
+---------------------------
+> docker run -d -p 3000:3001 --name feedback-container --env-file .env -v /app/feedback -v /app/temp feedback-app:v1
+
+command for viewing all volumes for the current running container =>
+
+>docker volume ls
+DRIVER    VOLUME NAME
+local     1495df54faddd0e24691facd4dd9befcd5c9b906d40a56cc410eada469a571d0
+local     8959c42520df44bfff3cb5b83622e6ed52125f194ac2440fe925e0aa19093598
+
 docker inspect:
 --------------------------------------------
 1. image [>docker inspect <image-name:tag>]
