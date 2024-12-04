@@ -1,4 +1,4 @@
-POST http://localhost:3000/favorites
+POST http://localhost:3001/favorites
 Content-Type: application/json
 
 {
@@ -8,4 +8,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/favorites
+GET http://localhost:3001/favorites

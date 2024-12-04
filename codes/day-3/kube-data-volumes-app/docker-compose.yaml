@@ -1,0 +1,12 @@
+version: "3"
+services:
+  stories:
+    build: .
+    environment:
+      - STORY_FOLDER=story
+    volumes:
+      - stories:/app/story
+    ports:
+      - 3000:3000
+volumes:
+  stories: 

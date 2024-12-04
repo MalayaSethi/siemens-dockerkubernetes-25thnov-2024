@@ -1,12 +1,14 @@
 const express = require('express')
 
 const app = express()
+
 app.get(
     '/',
     (req, res) => {
         res.end('welcome to message app')
     }
 )
+
 app.get('/welcome/:name', (req, res) => {
     const name = req.params.name
     res.send(
@@ -17,13 +19,22 @@ app.get('/welcome/:name', (req, res) => {
                 <title>Index</title>
             </head>
             <body>
-                <h2>Welcome to Node JS with Docker & Kubernetes ${name}</h2>
+                <h2>Welcome to Node JS with Docker ${name}</h2>
             </body>
         </html>`
     ).status(200)
 })
+
 app.get('/error', (req, res) => {
     process.exit(1)
 })
-const PORT = 3000
-app.listen(PORT, () => console.log('server running on http://localhost:' + PORT))
+
+const PORT = process.env.PORT || process.env.DEFAULT_PORT
+app.listen(PORT, () => {
+    console.log('server running on http://localhost:' + PORT)
+    console.log(process.env.NODE_VERSION)
+    console.log(process.env.PATH)
+    console.log(process.env.USER_NAME);
+    console.log(process.env.PASSWORD);
+}
+)

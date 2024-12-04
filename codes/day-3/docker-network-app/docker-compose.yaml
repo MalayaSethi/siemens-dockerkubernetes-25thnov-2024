@@ -1,0 +1,44 @@
+# version: "3.8"
+name: "fav-compose"
+services:
+  # container for mongodb image
+  mongoserver:
+    image: mongo
+    #named volume
+    volumes:
+      - data:/data/db
+    # stdin_open: true
+    # tty: true
+  
+  # container for fav-image:v1
+  fav-node:
+    # build:
+    #   context: ./path-of-dockerfile
+    #   dockerfile: Dockerfile
+
+    # build an image from this path before running the container
+    build: .
+
+    # image: fav-image:v1 (local or pool from registry)
+    environment:
+      - DNS_NAME=mongoserver
+    env_file:
+      - ./env/fav.env
+    ports:
+      - '3001:3001'
+      - '3002:3001'
+    volumes:
+      # anonymous volumes
+      - /app/node_modules
+      # bind mount
+      # - ./feedback:/app/feedback:ro
+    # tmpfs: /app/node_modules
+    depends_on:
+      - mongoserver
+    # restart: "on-failure"
+
+# docker volume create data
+volumes:
+  data:
+  
+   

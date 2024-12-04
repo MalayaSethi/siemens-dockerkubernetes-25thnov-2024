@@ -1,8 +1,12 @@
 continue with container
 data and volumes
-netwroking
+networking
 multi-container app
 docker-compose
+
+
+container has thin rw layer
+feedback and temp
 
 Mounts:
 -----------
@@ -13,7 +17,7 @@ A. Volume Mounts:
 1. anonymous volume
 ---------------------------------
 no name
--v /<container-dir-path>
+-v /<container-app-dir-path>
 this volume is persisted even when the docker container is stopped and even removed
 for every container, running the same image, new anonymous volume will be assigned (until and unless you want to share the anonymous volume of some other container)
 
@@ -24,7 +28,7 @@ But if the volume(s) is/are being shared by multiple container, then the first c
 
 But if the all the containers which are sharing this volume, started with --rm flag, when the last of them is stopped and subsequently removed, the volumes  will finally be removed.
 
-But if the any of the container which is sharing this volume, started not with --rm flag, when all of them are stopped and subsequently removed, the volumes  will still be there???
+But if the any of the container which is sharing this volume, started not with --rm flag, when all of them are stopped and subsequently removed, the volumes  will still be there.
 
 2. named volume:
 ------------------------------
@@ -35,6 +39,7 @@ you can assign this volume to one or many containers
 
 you will provide a name for the volume
 -v <volume-name>:/<container-dir-path>
+
 this volume is persisted even when the docker container is stopped and even removed. --rm flag will NOT have any impact on it.
 
 when the container is removed, and then again created, if you use the same named volume from previous cycle, it will be attached with the existing named volume.
@@ -71,7 +76,7 @@ C. TMPFS mount:
 
 
 Networking:
--------------------------
+-----------------------------------------------
 1. container app to WWW communication
 2. container app to local/host machine service/app
 3. container app to container app

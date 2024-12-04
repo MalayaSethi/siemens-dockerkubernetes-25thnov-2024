@@ -1,0 +1,65 @@
+view the networks and drivers in docker
+
+>docker network ls
+
+NETWORK ID     NAME      DRIVER    SCOPE
+b7d4509be313   bridge    bridge    local
+56bc08da9a65   host      host      local
+62b3b552f5f0   none      null      local
+
+>docker run --name mongoserver -d --network bridge mongo
+
+
+>docker network create fav-network
+>docker run --name mongoserver -d --network fav-network -v data:/data/db mongo
+>docker run -p 3001:3001 --name fav-node -e PORT=3001 --network fav-network fav-image:v1
+
+1. docker contanerized app trying connect WWWW (nothing to do)
+example: https://swapi.dev/api/people
+
+2. docker contanerized app trying connect local machine service (mongodb, sql server etc.) (IP addres: http://host.docker.internal:.....)
+example: mongodb://host.docker.internal:27017
+example: server=host.docker.internal/[sqlexpress]
+
+3. docker contanerized app trying connect another service in another docker container
+	a. create a network (or use default "bridge" network provided by bridge driver) using bridge driver
+	b. connect both the container with the same network
+	c. the network will create DNS Names as same as that of the container name
+	d. to connect you should the DNS (container) name
+
+example: mongodb://mongoserver:27017 [mongoserver is the name of the container or DNS)
+example: server=sqlserver/[sqlexpress] [sqlserver is the name of the container or DNS)
+
+4. an application in local machine trying to send request to a containerized app
+   expose the containerized app using a port while running the container using -p flag
+example:  
+>docker run -p 3001:3001 --name fav-node -e PORT=3001 --network fav-network fav-image:v1
+
+>docker run --name mongoserver -d --network fav-network -v data:/data/db mongo
+
+>docker run --name mongoserver -d --network fav-network --mount source=data,target=/data/db,mode=rw/ro mongo
+
+
+docker run -it -p 3001:3001 -p 3002:3001 -p 3003:3001 -d --name fav-node -e PORT=3001 --env-file ./env/fav.env --network fav-network -v d:/..../feedback:/app/feedback -v favourites:/app/favourites -v /app/temp --tmpfs /app/temporary fav-image:v1
+
+{
+	name: "fav-compose",
+	services:[
+	{
+		id: "mongoserver"
+	},
+
+	{
+	}
+		id: "fav-node"
+	]
+}
+
+docker volume create feedback
+docker run .... -v feedback:/app/feedback
+
+
+
+
+
+

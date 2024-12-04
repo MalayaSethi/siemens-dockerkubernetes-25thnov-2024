@@ -66,18 +66,18 @@ app.get('/people', async (req, res) => {
     res.status(500).json({ message: 'Something went wrong.' });
   }
 });
-app.listen(3000, () => console.log('server is running on port 3000'))
-// mongoose.connect(
-//'mongodb://localhost:27017/swfavorites',
-//'mongodb://172.17.0.2:27017/swfavorites',
-//   'mongodb://mongoserver:27017/swfavorites',
-//   { useNewUrlParser: true }
-// ).then(
-//   (value) => {
-//     console.log(value.connection);
-//     app.listen(3000, () => console.log('server is running on port 3000'))
-//   },
-//   (err) => {
-//     console.log(err);
-//   }
-// );
+const PORT_NUM = process.env.PORT || process.env.DEFAULT_PORT
+// app.listen(PORT_NUM, () => console.log('server is running on port ' + PORT_NUM))
+
+mongoose.connect(
+  `mongodb://${process.env.DNS_NAME}:27017/${process.env.DB_NAME}`,
+  { useNewUrlParser: true }
+).then(
+  (value) => {
+    console.log(value.connection);
+    app.listen(PORT_NUM, () => console.log('server is running on port ' + PORT_NUM))
+  },
+  (err) => {
+    console.log(err);
+  }
+);

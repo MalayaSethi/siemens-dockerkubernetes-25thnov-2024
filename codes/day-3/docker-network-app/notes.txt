@@ -1,0 +1,15 @@
+if you are trying to connect local service (mongodb, sqlserver) you should use the following:
+http://host.docker.internal:port_num/...../
+
+if both the application and mongodb is running in the local machine
+mongodb://localhost:27017/swfavorites
+
+if the application is running in the local machine and mongodb is running in cloud
+mongodb://<cloud-url>:27017/swfavorites
+
+if mongodb is running in a container, it can be reached by a IP address and mogodb by default exposes 27017 as port number
+if your app is running inside another container, use this
+mongodb://172.17.0.2:27017/swfavorites
+
+if the app and mongo db server are part of the same docker network then use this
+mongodb://<mongo-container-name>:27017/swfavorites
