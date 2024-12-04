@@ -9,6 +9,8 @@ services:
       - data:/data/db
     # stdin_open: true
     # tty: true
+    networks:
+      - fav-network
   
   # container for fav-image:v1
   fav-node:
@@ -36,9 +38,16 @@ services:
     depends_on:
       - mongoserver
     # restart: "on-failure"
+    networks:
+      - fav-network
 
 # docker volume create data
 volumes:
   data:
+
+# docker network create fav-network  
+networks:
+  fav-network:
+    driver: bridge
   
    
