@@ -36,6 +36,7 @@ before everything else check the systeminfo:
 1. install chocolatey
 2. install kubectl using chocolatey [choco install kubernetes-cli]
 3. install minikube using chocolatey [choco install minikube]
+
 change to user path: $env:UserProfile (in powershell)
 
 before starting minikube:
