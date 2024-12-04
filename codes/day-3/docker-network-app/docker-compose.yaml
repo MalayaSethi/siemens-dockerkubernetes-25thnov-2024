@@ -26,7 +26,7 @@ services:
       - ./env/fav.env
     ports:
       - '3001:3001'
-      - '3002:3001'
+      - '3002:3000'
     volumes:
       # anonymous volumes
       - /app/node_modules
