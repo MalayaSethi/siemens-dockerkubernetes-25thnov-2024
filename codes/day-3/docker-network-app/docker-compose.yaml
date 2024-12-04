@@ -1,5 +1,6 @@
 # version: "3.8"
 name: "fav-compose"
+
 services:
   # container for mongodb image
   mongoserver:
@@ -44,10 +45,13 @@ services:
 # docker volume create data
 volumes:
   data:
+    
 
 # docker network create fav-network  
+
 networks:
   fav-network:
-    driver: bridge
+    # driver: bridge
+
   
    
