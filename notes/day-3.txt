@@ -37,7 +37,7 @@ example:
 
 >docker run --name mongoserver -d --network fav-network -v data:/data/db mongo
 
->docker run --name mongoserver -d --network fav-network --mount source=data,target=/data/db,mode=rw/ro mongo
+>docker run -it --name mongoserver -d --network fav-network --mount source=data,target=/data/db,mode=rw/ro mongo
 
 
 docker run -it -p 3001:3001 -p 3002:3001 -p 3003:3001 -d --name fav-node -e PORT=3001 --env-file ./env/fav.env --network fav-network -v d:/..../feedback:/app/feedback -v favourites:/app/favourites -v /app/temp --tmpfs /app/temporary fav-image:v1
@@ -57,6 +57,8 @@ docker run -it -p 3001:3001 -p 3002:3001 -p 3003:3001 -d --name fav-node -e PORT
 
 docker volume create feedback
 docker run .... -v feedback:/app/feedback
+
+docker-compose up -d --build
 
 
 
