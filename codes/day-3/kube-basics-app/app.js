@@ -19,7 +19,7 @@ app.get('/welcome/:name', (req, res) => {
                 <title>Index</title>
             </head>
             <body>
-                <h2>Welcome to Node JS with Docker ${name}</h2>
+                <h2>Welcome to Node JS with Docker & Kubernetes ${name}</h2>
             </body>
         </html>`
     ).status(200)
@@ -28,7 +28,7 @@ app.get('/welcome/:name', (req, res) => {
 app.get('/error', (req, res) => {
     process.exit(1)
 })
-
+// app.listen(3000, () => console.log('server is running using port 3000'))
 const PORT = process.env.PORT || process.env.DEFAULT_PORT
 app.listen(PORT, () => {
     console.log('server running on http://localhost:' + PORT)

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-pod
+  template:
+    metadata:
+      labels:
+        app: rest-pod
+        # tier: backend
+    spec:
+      containers:
+        - name: rest-pod-container
+          image: joydipdocker/rest-app:v2
+          env:
+            - name: PORT
+              value: "3001"
+            - name: USER_NAME
+              value: joydip
+            - name: PASSWORD
+              value: joydip
+          # volumes:
