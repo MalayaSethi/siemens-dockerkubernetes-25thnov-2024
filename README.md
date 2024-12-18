@@ -12,4 +12,6 @@ the name of the shared volume would be known here
 But when the secondary container is removed, the volume goes off as well.
 
     docker volume ls
-*Note* - Named volume can be created but not Anonymous volume.
+*Note* - Named volume can be created manually but not Anonymous volume by `docker volume create` command
+
+*Note* - The volume does not increase the size of the container. 
